@@ -3,10 +3,7 @@ package main;
 import "fmt";
 
 func main() {
-	var employees []string;
-	employees = append(employees, "Umar Hadi Mukti");
-	employees = append(employees, "John Doe");
-	employees = append(employees, "Jane Smith");
+	var employees = [...]string{"Umar", "John", "Jane"};
 
 	fmt.Println("Employee List:");
 	for i := 0; i < len(employees); i++ {
@@ -15,7 +12,7 @@ func main() {
 	fmt.Println("Total Employee: " + fmt.Sprint(len(employees)));
 	fmt.Println("======================");
 
-	var pantsSizes []int = []int{28, 30, 32, 34, 36};
+	var pantsSizes = [...]int{28, 30, 32, 34, 36};
 	fmt.Println("Available Pants Sizes:")
 	for _, size := range pantsSizes {
 		fmt.Println("- Size " + fmt.Sprint(size));

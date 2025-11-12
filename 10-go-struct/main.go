@@ -7,13 +7,14 @@ type Employee struct {
 	age int;
 }
 
+func (employee Employee) getInfo() string {
+	return "Name: " + employee.Name + ", Position: " + employee.Position + ", Country: " + employee.Country + ", Age: " + fmt.Sprint(employee.age);
+}
+
 func main() {
 	firstEmployee := Employee{"Umar", "Software Engineer", "Indonesia", 14};
 	fmt.Println("First Employee");
-	fmt.Println("Name: " + firstEmployee.Name);
-	fmt.Println("Position: " + firstEmployee.Position);
-	fmt.Println("Country: " + firstEmployee.Country);
-	fmt.Println("Age: " + fmt.Sprint(firstEmployee.age));
+	fmt.Println(firstEmployee.getInfo());
 	fmt.Println("===========================");
 
 	var secondEmployee Employee;
@@ -22,10 +23,7 @@ func main() {
 	secondEmployee.Country = "USA";
 	secondEmployee.age = 35;
 	fmt.Println("Second Employee");
-	fmt.Println("Name: " + secondEmployee.Name);
-	fmt.Println("Position: " + secondEmployee.Position);
-	fmt.Println("Country: " + secondEmployee.Country);
-	fmt.Println("Age: " + fmt.Sprint(secondEmployee.age));
+	fmt.Println(secondEmployee.getInfo());
 	fmt.Println("===========================");
 
 	thirdEmployee := Employee{
@@ -35,9 +33,5 @@ func main() {
 		age:      28,
 	};
 	fmt.Println("Third Employee");
-	fmt.Println("Name: " + thirdEmployee.Name);
-	fmt.Println("Position: " + thirdEmployee.Position);
-	fmt.Println("Country: " + thirdEmployee.Country);
-	fmt.Println("Age: " + fmt.Sprint(thirdEmployee.age));
-	fmt.Println("===========================");
+	fmt.Println(thirdEmployee.getInfo());
 }

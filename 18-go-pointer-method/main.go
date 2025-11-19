@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"practice-go/18-go-pointer-method/utils"
 )
 
 type Product struct {
@@ -20,4 +21,6 @@ func main() {
 	fmt.Println("Product Name:", product1.Name)
 	fmt.Println("Category:", product1.Category)
 	fmt.Println("Price:", "Rp" + fmt.Sprint(int(product1.Price)))
+
+	utils.Greeting()
 }

@@ -4,10 +4,11 @@ import (
 	"fmt"
 	"errors"
 	errors_pkg "practice-go/go-std-libraries/errors"
+	os_pkg "practice-go/go-std-libraries/os"
 )
 
 func main() {
-	fmt.Println("---Errors Libraries---")
+	fmt.Println("---Errors Library---")
 
 	student, err := errors_pkg.GetStudentById(2)
 	if err != nil {
@@ -21,4 +22,8 @@ func main() {
 	} else {
 		fmt.Println("Student found:", student)
 	}
+
+	fmt.Println("\n---Os Library---") 
+	os_pkg.ReadFile("go-std-libraries/os/data.txt")
+	os_pkg.WriteFile("go-std-libraries/os/data.txt", "Let's go, common!")
 }

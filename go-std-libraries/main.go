@@ -11,6 +11,7 @@ import (
 	math_pkg "practice-go/go-std-libraries/math"
 	container_list_pkg "practice-go/go-std-libraries/container-list"
 	container_ring_pkg "practice-go/go-std-libraries/container-ring"
+	time_pkg "practice-go/go-std-libraries/time"
 )
 
 func main() {
@@ -56,4 +57,7 @@ func main() {
 
 	fmt.Println("\n---Container ring library---")
 	container_ring_pkg.DemoCircularList()
+
+	fmt.Println("\n---Time Library---")
+	time_pkg.DemoTimePackage()
 }

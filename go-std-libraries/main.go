@@ -8,6 +8,7 @@ import (
 	flag_pkg "practice-go/go-std-libraries/flag"
 	strings_pkg "practice-go/go-std-libraries/strings"
 	strconv_pkg "practice-go/go-std-libraries/strconv"
+	math_pkg "practice-go/go-std-libraries/math"
 )
 
 func main() {
@@ -44,4 +45,7 @@ func main() {
 
 	fmt.Println("\n---Strconv Library---")
 	strconv_pkg.DemoStrconvPackage()
+
+	fmt.Println("\n---Math Library---")
+	math_pkg.DemoMathPackage()
 }

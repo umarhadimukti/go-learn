@@ -9,6 +9,7 @@ import (
 	strings_pkg "practice-go/go-std-libraries/strings"
 	strconv_pkg "practice-go/go-std-libraries/strconv"
 	math_pkg "practice-go/go-std-libraries/math"
+	container_list_pkg "practice-go/go-std-libraries/container-list"
 )
 
 func main() {
@@ -48,4 +49,7 @@ func main() {
 
 	fmt.Println("\n---Math Library---")
 	math_pkg.DemoMathPackage()
+
+	fmt.Println("\n---Container lists Library---")
+	container_list_pkg.DemoLinkedList()
 }

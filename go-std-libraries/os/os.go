@@ -20,3 +20,18 @@ func WriteFile(filepath string, data string) {
 		log.Fatal(err)
 	}
 }
+
+func ReadArgs() {
+	args := os.Args
+	for _, arg := range args {
+		fmt.Println(arg)
+	}
+}
+
+func GetHostname() {
+	hostname, err := os.Hostname()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Hostname:", hostname)
+}

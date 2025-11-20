@@ -26,4 +26,8 @@ func main() {
 	fmt.Println("\n---Os Library---") 
 	os_pkg.ReadFile("go-std-libraries/os/data.txt")
 	os_pkg.WriteFile("go-std-libraries/os/data.txt", "Let's go, common!")
+	fmt.Println("---Command Line Arguments---")
+	os_pkg.ReadArgs()
+	fmt.Println("---Hostname---")
+	os_pkg.GetHostname()
 }

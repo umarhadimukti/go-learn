@@ -5,6 +5,7 @@ import (
 	"errors"
 	errors_pkg "practice-go/go-std-libraries/errors"
 	os_pkg "practice-go/go-std-libraries/os"
+	flag_pkg "practice-go/go-std-libraries/flag"
 )
 
 func main() {
@@ -24,10 +25,15 @@ func main() {
 	}
 
 	fmt.Println("\n---Os Library---") 
+	fmt.Println("Read file:")
 	os_pkg.ReadFile("go-std-libraries/os/data.txt")
+	fmt.Println("Write file:")
 	os_pkg.WriteFile("go-std-libraries/os/data.txt", "Let's go, common!")
-	fmt.Println("---Command Line Arguments---")
+	fmt.Println("Read args:")
 	os_pkg.ReadArgs()
-	fmt.Println("---Hostname---")
+	fmt.Println("Get hostname:")
 	os_pkg.GetHostname()
+
+	fmt.Println("\n---Flag Library---")
+	flag_pkg.GetDatabaseConfig()
 }

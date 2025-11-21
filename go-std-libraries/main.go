@@ -17,6 +17,7 @@ import (
 	encoding_pkg "practice-go/go-std-libraries/encoding"
 	slices_pkg "practice-go/go-std-libraries/slices"
 	path_pkg "practice-go/go-std-libraries/path"
+	bufio_pkg "practice-go/go-std-libraries/bufio"
 )
 
 func main() {
@@ -80,4 +81,7 @@ func main() {
 
 	fmt.Println("\n---Path Library---")
 	path_pkg.DemoPathPackage()
+
+	fmt.Println("\n---Bufio Library---")
+	bufio_pkg.DemoBufioPackage()
 }

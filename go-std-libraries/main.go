@@ -13,6 +13,7 @@ import (
 	container_ring_pkg "practice-go/go-std-libraries/container-ring"
 	time_pkg "practice-go/go-std-libraries/time"
 	reflect_pkg "practice-go/go-std-libraries/reflect"
+	regexp_pkg "practice-go/go-std-libraries/regexp"
 )
 
 func main() {
@@ -64,4 +65,7 @@ func main() {
 
 	fmt.Println("\n---Reflect Library---")
 	reflect_pkg.DemoReflectPackage()
+
+	fmt.Println("\n---Regexp Library---")
+	regexp_pkg.DemoRegexpPackage()
 }

@@ -16,6 +16,7 @@ import (
 	regexp_pkg "practice-go/go-std-libraries/regexp"
 	encoding_pkg "practice-go/go-std-libraries/encoding"
 	slices_pkg "practice-go/go-std-libraries/slices"
+	path_pkg "practice-go/go-std-libraries/path"
 )
 
 func main() {
@@ -76,4 +77,7 @@ func main() {
 
 	fmt.Println("\n---Slices Library---")
 	slices_pkg.DemoSlicesPackage()
+
+	fmt.Println("\n---Path Library---")
+	path_pkg.DemoPathPackage()
 }

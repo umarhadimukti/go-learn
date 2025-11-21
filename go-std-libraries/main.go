@@ -12,6 +12,7 @@ import (
 	container_list_pkg "practice-go/go-std-libraries/container-list"
 	container_ring_pkg "practice-go/go-std-libraries/container-ring"
 	time_pkg "practice-go/go-std-libraries/time"
+	reflect_pkg "practice-go/go-std-libraries/reflect"
 )
 
 func main() {
@@ -60,4 +61,7 @@ func main() {
 
 	fmt.Println("\n---Time Library---")
 	time_pkg.DemoTimePackage()
+
+	fmt.Println("\n---Reflect Library---")
+	reflect_pkg.DemoReflectPackage()
 }

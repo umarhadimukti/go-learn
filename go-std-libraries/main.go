@@ -14,6 +14,7 @@ import (
 	time_pkg "practice-go/go-std-libraries/time"
 	reflect_pkg "practice-go/go-std-libraries/reflect"
 	regexp_pkg "practice-go/go-std-libraries/regexp"
+	encoding_pkg "practice-go/go-std-libraries/encoding"
 )
 
 func main() {
@@ -68,4 +69,7 @@ func main() {
 
 	fmt.Println("\n---Regexp Library---")
 	regexp_pkg.DemoRegexpPackage()
+
+	fmt.Println("\n---Encoding Library---")
+	encoding_pkg.DemoEncodingPackage()
 }

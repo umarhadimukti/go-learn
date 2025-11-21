@@ -15,6 +15,7 @@ import (
 	reflect_pkg "practice-go/go-std-libraries/reflect"
 	regexp_pkg "practice-go/go-std-libraries/regexp"
 	encoding_pkg "practice-go/go-std-libraries/encoding"
+	slices_pkg "practice-go/go-std-libraries/slices"
 )
 
 func main() {
@@ -72,4 +73,7 @@ func main() {
 
 	fmt.Println("\n---Encoding Library---")
 	encoding_pkg.DemoEncodingPackage()
+
+	fmt.Println("\n---Slices Library---")
+	slices_pkg.DemoSlicesPackage()
 }

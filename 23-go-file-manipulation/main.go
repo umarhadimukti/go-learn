@@ -40,6 +40,19 @@ func readFile(filePath string) (string, error) {
 	return content, nil
 }
 
+func appendContentToFile(filePath, msg string) error {
+	file, err := os.OpenFile(filePath, os.O_RDWR|os.O_APPEND, 0644)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+	_, err = file.WriteString(msg)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func main() {
 	dataString := "Hello, welcome to the Hotel California.\nSuch a lovely place"
 
@@ -52,5 +65,14 @@ func main() {
 		fmt.Println("Error reading file:", err)
 	} else {
 		fmt.Println("File Content:\n" + content)
+	}
+
+	// ==== Appending content to the file ====
+	appendMsg := "\nYou can check out any time you like, but you can never leave!"
+	err = appendContentToFile("23-go-file-manipulation/data_manipulation.txt", appendMsg)
+	if err != nil {
+		fmt.Println("Error appending to file:", err)
+	} else {
+		fmt.Println("Content appended successfully.")
 	}
 }

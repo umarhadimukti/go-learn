@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io"
 	"os"
 )
 
@@ -20,7 +22,35 @@ func createNewFile(msg string) {
 	fmt.Println("File created and data written successfully.")
 }
 
+func readFile(filePath string) (string, error) {
+	file, err := os.OpenFile(filePath, os.O_RDONLY, 0644)
+	if err != nil {
+		return "", err
+	}
+	defer file.Close()
+	reader := bufio.NewReader(file)
+	var content string
+	for {
+		line, _, err := reader.ReadLine()
+		if err == io.EOF {
+			break
+		}
+		content += string(line) + "\n"
+	}
+	return content, nil
+}
+
 func main() {
 	dataString := "Hello, welcome to the Hotel California.\nSuch a lovely place"
+
+	// ==== Creating and writing to a file ====
 	createNewFile(dataString)
+
+	// ==== Reading the file ====
+	content, err := readFile("23-go-file-manipulation/data_manipulation.txt")
+	if err != nil {
+		fmt.Println("Error reading file:", err)
+	} else {
+		fmt.Println("File Content:\n" + content)
+	}
 }

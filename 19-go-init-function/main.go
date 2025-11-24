@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"practice-go/19-go-init-function/utils"
+	"github.com/umarhadimukti/go-learn/19-go-init-function/utils"
 )
 
 func main() {

@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"practice-go/18-go-pointer-method/utils"
+	"github.com/umarhadimukti/go-learn/18-go-pointer-method/utils"
 )
 
 type Product struct {

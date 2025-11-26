@@ -28,3 +28,11 @@ func SquareRoot(x float64) float64 {
 func Power(base, exponent float64) float64 {
 	return math.Pow(base, exponent)
 }
+
+func Round(x float64) float64 {
+	return math.Round(x)
+}
+
+func IsNan(x float64) bool {
+	return math.IsNaN(x)
+}

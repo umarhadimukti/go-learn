@@ -20,3 +20,11 @@ func DemoMathPackage() {
 
 	fmt.Println(math.IsNaN(4.2)) // check if value is NaN
 }
+
+func SquareRoot(x float64) float64 {
+	return math.Sqrt(x)
+}
+
+func Power(base, exponent float64) float64 {
+	return math.Pow(base, exponent)
+}

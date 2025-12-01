@@ -68,7 +68,7 @@ func TestSubTest(t *testing.T) {
 }
 
 func TestMathTable(t *testing.T) {
-	// declare tests array of struct
+	// declare tests slice of struct
 	tests := []struct {
 		name string
 		request float64
@@ -143,4 +143,39 @@ func BenchmarkMath(b *testing.B) {
 			math_pkg.Power(25, 2)
 		}
 	})
+}
+
+func BenchmarkMathTable(b *testing.B) {
+	benchs := []struct {
+		name string;
+		request float64;
+		expected float64;
+		option string;
+	} {
+		{
+			name: "Benchmark math round",
+			request: 78.5,
+			expected: 79,
+			option: "round",
+		},
+		{
+			name: "Benchmark math square root",
+			request: 25,
+			expected: 5,
+			option: "sqrt",
+		},
+	}
+
+	for _, bench := range benchs {
+		b.Run(bench.name, func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				switch bench.option {
+				case "round":
+					math_pkg.Round(bench.request)
+				case "sqrt":
+					math_pkg.SquareRoot(bench.request)
+				}
+			}
+		})
+	}
 }

@@ -114,3 +114,33 @@ func TestMathTable(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkSquareRoot(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		math_pkg.SquareRoot(16)
+		var counter int
+		for j := 0; j < 1000000; j++ {
+			counter++
+		}
+	}
+}
+
+func BenchmarkRound(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		math_pkg.Round(15.9)
+	}
+}
+
+func BenchmarkMath(b *testing.B) {
+	b.Run("Benchmark math is nan", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			math_pkg.IsNan(100)
+		}
+	})
+
+	b.Run("Benchmark math power", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			math_pkg.Power(25, 2)
+		}
+	})
+}

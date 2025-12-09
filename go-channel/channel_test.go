@@ -43,3 +43,21 @@ func TestInOutChannel(t *testing.T) {
 
 	time.Sleep(4 * time.Second)
 }
+
+func TestBufferChannel(t *testing.T) {
+	channel := make(chan []int, 3)
+	defer close(channel)
+
+	go ProcessBufferChannel(channel)
+
+	data1 := <- channel
+	data2 := <- channel
+	data3 := <- channel
+	data4 := <- channel
+	data5 := <- channel
+	fmt.Println(data1)
+	fmt.Println(data2)
+	fmt.Println(data3)
+	fmt.Println(data4)
+	fmt.Println(data5)
+}

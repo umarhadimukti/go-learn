@@ -79,3 +79,25 @@ func TestRangeChannel(t *testing.T) {
 
 	fmt.Println("Selesai")
 }
+
+func TestSelectChannel(t *testing.T) {
+	channel1 := make(chan string)
+	channel2 := make(chan int)
+
+	defer close(channel1)
+	defer close(channel2)
+
+	go func() {
+		channel1 <- "Tattakae!!"
+		channel2 <- 800
+	}()
+
+	for i := 0; i < 2; i++ {
+		select {
+		case data1 := <- channel1:
+			fmt.Println("this from channel 1:", data1)
+		case data2 := <- channel2:
+			fmt.Println("this from channel 2:", data2)
+		}
+	}
+}

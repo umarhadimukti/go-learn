@@ -92,12 +92,21 @@ func TestSelectChannel(t *testing.T) {
 		channel2 <- 800
 	}()
 
-	for i := 0; i < 2; i++ {
+	var counter int
+	for {
 		select {
 		case data1 := <- channel1:
 			fmt.Println("this from channel 1:", data1)
+			counter++
 		case data2 := <- channel2:
 			fmt.Println("this from channel 2:", data2)
+			counter++
+		default:
+			fmt.Println("waiting for data..")
+		}
+
+		if counter == 2 {
+			break
 		}
 	}
 }

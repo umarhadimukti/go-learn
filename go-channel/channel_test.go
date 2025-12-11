@@ -82,7 +82,7 @@ func TestRangeChannel(t *testing.T) {
 
 func TestSelectChannel(t *testing.T) {
 	channel1 := make(chan string)
-	channel2 := make(chan int)
+	channel2 := make(chan int, 3)
 
 	defer close(channel1)
 	defer close(channel2)
@@ -90,6 +90,8 @@ func TestSelectChannel(t *testing.T) {
 	go func() {
 		channel1 <- "Tattakae!!"
 		channel2 <- 800
+		channel2 <- 700
+		channel2 <- 600
 	}()
 
 	var counter int
@@ -105,7 +107,7 @@ func TestSelectChannel(t *testing.T) {
 			fmt.Println("waiting for data..")
 		}
 
-		if counter == 2 {
+		if counter == 4 {
 			break
 		}
 	}

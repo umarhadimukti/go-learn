@@ -19,4 +19,12 @@ func main() {
 	}
 	fmt.Println("Total Sizes: " + fmt.Sprint(len(pantsSizes)));
 	fmt.Println("======================");
+
+	var messages = [...]string{"Halo ini siapa", "Lagi dimana", "Sama siapa"};
+	fmt.Println("Chat list:");
+	for i, message := range messages {
+		fmt.Println(fmt.Sprint(i+1, "."), message);
+	}
+	fmt.Println("Total length of chats:", len(messages));
+	fmt.Println("=====================");
 }

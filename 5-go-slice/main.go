@@ -37,8 +37,14 @@ func main() {
 	fromSlice := days[:];
 	toSlice := make([]string, len(fromSlice), cap(fromSlice));
 	copy(toSlice, fromSlice);
-	toSlice[0] = "ChangedDay";
+	toSlice[0] = "ChangedDay"; // this will not be change the original index value of the array
 	fmt.Println("From Slice: " + fmt.Sprint(fromSlice));
 	fmt.Println("To slice after copy and modification: " + fmt.Sprint(toSlice));
 	fmt.Println("fromSlice after toSlice modification: " + fmt.Sprint(fromSlice));
+	fmt.Println("=========================");
+
+	copyOfDaySlice := days[:];
+	copyOfDaySlice[5] = "Friday"; // this will change the original index value of the array
+	fmt.Println("Copy of days:", copyOfDaySlice);
+	fmt.Println("Original days array:", days);
 }

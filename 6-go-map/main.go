@@ -29,7 +29,6 @@ func main() {
 		"Bob": 25,
 		"Charlie": 35,
 	};
-
 	newAges := make(map[string]int);
 	for name, age := range ages {
 		newAges[name] = age;
@@ -44,14 +43,4 @@ func main() {
 		fmt.Println("Alice's age not found");
 	}
 	fmt.Println("=======================" );
-
-	var grades [9]int = [9]int{90, 85, 88, 92, 95, 45, 69, 30, 55};
-	var badGrades []int;
-	for i := 0; i < len(grades); i++ {
-		if grade := grades[i]; grade < 75 {
-			badGrades = append(badGrades, grade);
-		}
-	}
-	fmt.Println("Bad Grades: " + fmt.Sprint(badGrades));
-	fmt.Println("=======================");
 }

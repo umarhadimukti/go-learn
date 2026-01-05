@@ -47,4 +47,15 @@ func main() {
 	copyOfDaySlice[5] = "Friday"; // this will change the original index value of the array
 	fmt.Println("Copy of days:", copyOfDaySlice);
 	fmt.Println("Original days array:", days);
+	fmt.Println("=========================");
+
+	var grades [9]int = [9]int{90, 85, 88, 92, 95, 45, 69, 30, 55};
+	var badGrades []int;
+	for i := 0; i < len(grades); i++ {
+		if grade := grades[i]; grade < 75 {
+			badGrades = append(badGrades, grade);
+		}
+	}
+	fmt.Println("Bad Grades: " + fmt.Sprint(badGrades));
+	fmt.Println("=======================");
 }

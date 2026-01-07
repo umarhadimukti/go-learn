@@ -2,7 +2,6 @@ package tests
 
 import (
 	"testing"
-
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"github.com/umarhadimukti/go-learn/24-unit-test/entities"

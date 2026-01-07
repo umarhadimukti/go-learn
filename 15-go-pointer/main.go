@@ -26,4 +26,8 @@ func main() {
 	fmt.Println("\n--- Update value (by asterisk) ---")
 	fmt.Println(user1)
 	fmt.Println(user3)
+	
+	fmt.Println()
+	user4 := &User{"110", "Sasuke", "sasuke@gmail.com", "Jepang"}
+	PracticeAddress(user4)
 }

@@ -14,11 +14,11 @@ type Employee struct {
 	Age                     int
 }
 
-func (employee Employee) GetPosition() string {
+func (employee *Employee) GetPosition() string {
 	return fmt.Sprint(employee.Name) + " is a " + fmt.Sprint(employee.Position)
 }
 
-func (employee Employee) SetPosition(position string) {
+func (employee *Employee) SetPosition(position string) {
 	employee.Position = position
 	Greeting(employee)
 }
@@ -41,7 +41,7 @@ func ShowMessageType(message Message) {
 
 func main() {
 	firstEmployee := Employee{"Umar", "Software Engineer", "Indonesia", 14}
-	Greeting(firstEmployee)
+	Greeting(&firstEmployee)
 	firstEmployee.SetPosition("Senior Software Engineer")
 	fmt.Println("=======================================")
 

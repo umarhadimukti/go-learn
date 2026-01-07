@@ -15,4 +15,7 @@ func main() {
 	product2 = &Product{"Acer Predator", "Laptop", "Rp 20.000.000"}
 	fmt.Println(*product1)
 	fmt.Println(*product2)
+
+	x := new(int)
+	fmt.Println("Value of x:", *x)
 }

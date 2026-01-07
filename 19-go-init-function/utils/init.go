@@ -6,6 +6,8 @@ import (
 
 var databaseName string
 
+// init function's executed every time a file is run
+// init function cannot return a value
 func init() {
 	databaseName = "db-hotel-california"
 }

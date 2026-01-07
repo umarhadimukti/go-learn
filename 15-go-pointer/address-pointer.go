@@ -1,3 +1,9 @@
+/**
+* To run this file, follow this command:
+* cd 15-go-pointer
+* go run .
+*/
+
 package main
 
 import (

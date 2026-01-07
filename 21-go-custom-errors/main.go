@@ -31,7 +31,7 @@ func SaveData(id int, data any) (string, error) {
 }
 
 func main() {
-	result, err := SaveData(3, nil)
+	result, err := SaveData(2, 50)
 	if err != nil {
 		// data validation error
 		switch finalError := err.(type) {

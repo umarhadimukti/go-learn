@@ -34,4 +34,7 @@ func main() {
 	fmt.Println("Before sorting:", students)
 	sort.Sort(StudentSlice(students))
 	fmt.Println("After sorting by Age:", students)
+	
+	fmt.Println()
+	SortLecture()
 }

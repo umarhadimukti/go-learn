@@ -1,30 +1,38 @@
-package channel
+package main
 
 import (
 	"fmt"
-	"time"
 )
 
-func ProcessChannel(channel chan string) {
-	time.Sleep(2 * time.Second)
-	channel <- "Sended from Process Channel."
-	fmt.Println("Successfully sended!")
+func addTwoNumbers(a, b int, result chan int) {
+	sum := a + b
+	result <- sum // send first data
+	result <- sum + 5 // send second data
+	result <- sum + 10 // send third data
+	result <- sum + 20 // send fourth data
 }
 
-func ProcessInChannel(channel chan<- int) {
-	channel <- 500
-	fmt.Println("Successfully sended integer value")
-}
+func main() {
+	// first, make empty channel (3 capacities)
+	emptyChannel1 := make(chan int, 3) // buffer: [] capacity: 3
 
-func ProcessOutChannel(channel <-chan int) {
-	data := <- channel
-	fmt.Println(data)
-}
+	// second, run goroutines with function addTwoNumbers and send empty channel
+	go addTwoNumbers(5, 6, emptyChannel1)
 
-func ProcessBufferChannel(channel chan<- []int) {
-	channel <- []int{2,4,1,6,1,9,8}
-	channel <- []int{3,5,6,2,5,4,2}
-	channel <- []int{9,4,5,2,6,1,5}
-	channel <- []int{5,1,5,6,2,3,6}
-	fmt.Println("Successfully sended numbers")
+	// receive first data
+	result1 := <- emptyChannel1 // buffer: [11] capacity: 3
+	fmt.Println("Result is", result1)
+
+	// receive second data
+	result2 := <- emptyChannel1 // buffer: [11,16] capacity: 3
+	fmt.Println("Result is", result2)
+
+	// receive third data
+	result3 := <- emptyChannel1 // buffer: [11,16,21] (full) capacity: 3
+	fmt.Println("Result is", result3)
+
+	// receive fourth data
+	// blocked because buffer is full
+	result4 := <- emptyChannel1 // then, buffer: [16,21,31] capacity: 3
+	fmt.Println("Result is", result4)
 }

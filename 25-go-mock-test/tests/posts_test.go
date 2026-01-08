@@ -2,7 +2,6 @@ package test
 
 import (
 	"testing"
-
 	"github.com/stretchr/testify/assert"
 	post_mock "github.com/umarhadimukti/go-learn/25-go-mock-test/mock"
 )

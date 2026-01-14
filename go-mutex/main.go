@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"sync"
 	"time"
+	rw_mutex "github.com/umarhadimukti/go-learn/go-mutex/rw"
 )
 
 type BankAccount struct {
@@ -42,4 +43,7 @@ func BalanceWithoutMutex() {
 func main() {
 	BalanceWithMutex()
 	BalanceWithoutMutex()
+	fmt.Println("============================")
+	balanceWithRW := rw_mutex.GetBalanceWithRWMutex()
+	fmt.Println("Balance with RWMutex:", balanceWithRW)
 }

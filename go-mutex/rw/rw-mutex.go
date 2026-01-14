@@ -1,14 +1,12 @@
 package rw
 
 import (
-	_"fmt"
 	"sync"
-	"time"
 )
 
 type BankAccount struct {
 	Balance int
-	mu sync.RWMutex
+	mu      sync.RWMutex
 }
 
 func (account *BankAccount) DepositWithRWMutex(amount int) {
@@ -17,22 +15,32 @@ func (account *BankAccount) DepositWithRWMutex(amount int) {
 	account.Balance += amount
 }
 
+func (account *BankAccount) GetFinalBalance() int {
+	account.mu.RLock()
+	defer account.mu.RUnlock()
+	balance := account.Balance
+	return balance
+}
+
 // calculate deposit with rw mutex
 func CalcDepositWithRWMutex(account *BankAccount) {
+	var wg sync.WaitGroup
 	for i := 0; i < 10000; i++ {
-		go account.DepositWithRWMutex(1)
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			account.DepositWithRWMutex(1)
+		}()
 	}
-	time.Sleep(time.Second)
+	wg.Wait()
 }
 
 // get final balance with rw mutex
 func GetBalanceWithRWMutex() int {
 	account := &BankAccount{Balance: 0}
-	CalcDepositWithRWMutex(account)
-	
-	// read lock
-	account.mu.RLock()
-	defer account.mu.RUnlock()
 
-	return account.Balance
+	CalcDepositWithRWMutex(account)
+	finalBalance := account.GetFinalBalance()
+
+	return finalBalance
 }

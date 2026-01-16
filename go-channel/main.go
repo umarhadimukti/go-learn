@@ -15,6 +15,7 @@ func addTwoNumbers(a, b int, result chan int) {
 func main() {
 	// first, make empty channel (3 capacities)
 	emptyChannel1 := make(chan int, 3) // buffer: [] capacity: 3
+	defer close(emptyChannel1)
 
 	// second, run goroutines with function addTwoNumbers and send empty channel
 	go addTwoNumbers(5, 6, emptyChannel1)

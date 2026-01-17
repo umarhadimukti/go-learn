@@ -7,6 +7,7 @@ func main() {
 
 	var firstSliceOfMonths = months[1:4];
 	fmt.Println("Months from index 1 to 3: " + fmt.Sprint(firstSliceOfMonths));
+	fmt.Println("Months from index 1 to tail: " + fmt.Sprint(months[1:]))
 	fmt.Println("=========================");
 
 	var secondSliceOfMonths = months[:7];

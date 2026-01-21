@@ -50,17 +50,13 @@ func contextWithCancelTest(ctx context.Context) chan int  {
 	return destination
 }
 
-func main() {
-	// run contextWithValueTest function
-	contextWithValueTest()
-
-	// run contextWithCancel function
+func runWithChannel() {
 	fmt.Println("Goroutines before WithCancel:", runtime.NumGoroutine())
 	parent := context.Background()
 	ctx, cancel := context.WithCancel(parent)
 
 	destination := contextWithCancelTest(ctx)
-	fmt.Println("Goroutines while processing:", runtime.NumGoroutine())
+	fmt.Println("Goroutines while processing with cancel:", runtime.NumGoroutine())
 	for dest := range destination {
 		fmt.Println("Destination:", dest)
 		if dest == 10 {
@@ -72,4 +68,53 @@ func main() {
 	time.Sleep(2 * time.Second)
 
 	fmt.Println("Goroutines after WithCancel:", runtime.NumGoroutine())
+}
+
+func contextWithTimeoutTest(ctx context.Context) chan int {
+	destination := make(chan int)
+
+	go func() {
+		defer close(destination)
+		counter := 1
+		for {
+			select {
+			case <- ctx.Done():
+				return
+			default:
+				destination <- counter
+				counter++
+				time.Sleep(time.Second)
+			}
+		}
+	}()
+
+	return destination
+}
+
+func runWithTimeout() {
+	fmt.Println("Goroutines before WithTimeout", runtime.NumGoroutine())
+	parent := context.Background()
+	ctx, cancel := context.WithTimeout(parent, 5 * time.Second)
+	defer cancel()
+	destination := contextWithTimeoutTest(ctx)
+	fmt.Println("Goroutine while processing", runtime.NumGoroutine())
+	for dest := range destination {
+		fmt.Println("Destination", dest)
+		if dest == 15 {
+			break
+		}
+	}
+	time.Sleep(2 * time.Second)
+	fmt.Println("Goroutines after WithCancel", runtime.NumGoroutine())
+}
+
+func main() {
+	// run contextWithValueTest function
+	contextWithValueTest()
+
+	// run contextWithCancel function
+	runWithChannel()
+
+	// run contextWithTimeout function
+	runWithTimeout()
 }

@@ -1,8 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"context"
+	"fmt"
+	"runtime"
+	"time"
 )
 
 func contextWithValueTest() {
@@ -27,8 +29,47 @@ func contextWithValueTest() {
 	fmt.Println("Context F Hierarki:", contextF.Value("f"))
 	fmt.Println("Context F Hierarki:", contextF.Value("d"))
 	fmt.Println("Context F Hierarki:", contextF.Value("b"))
+	fmt.Println("==================================")
+}
+
+func contextWithCancelTest(ctx context.Context) chan int  {
+	destination := make(chan int)
+	go func() {
+		defer close(destination)
+		counter := 1
+		for {
+			select {
+			case <- ctx.Done():
+				return
+			default:
+				destination <- counter
+				counter++
+			}
+		}
+	}()
+	return destination
 }
 
 func main() {
+	// run contextWithValueTest function
 	contextWithValueTest()
+
+	// run contextWithCancel function
+	fmt.Println("Goroutines before WithCancel:", runtime.NumGoroutine())
+	parent := context.Background()
+	ctx, cancel := context.WithCancel(parent)
+
+	destination := contextWithCancelTest(ctx)
+	fmt.Println("Goroutines while processing:", runtime.NumGoroutine())
+	for dest := range destination {
+		fmt.Println("Destination:", dest)
+		if dest == 10 {
+			break
+		}
+	}
+	cancel() // cancel() method will send trigger to ctx.Done()
+
+	time.Sleep(2 * time.Second)
+
+	fmt.Println("Goroutines after WithCancel:", runtime.NumGoroutine())
 }

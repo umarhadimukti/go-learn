@@ -13,8 +13,19 @@ func initializeDatabase(ctx context.Context) (*pgxpool.Pool, error) {
 	// DSN postgresql
 	dsn := "postgres://postgres:12344321@localhost:5432/db-contact"
 
+	// Create connection config
+	config, err := pgxpool.ParseConfig(dsn)
+	if err != nil {
+		return nil, err
+	}
+
+	config.MaxConns = 10
+	config.MinConns = 2
+	config.MaxConnIdleTime = 5 * time.Minute
+	config.MaxConnLifetime = 30 * time.Minute
+
 	// Connection with pool
-	db, err := pgxpool.New(ctx, dsn)
+	db, err := pgxpool.NewWithConfig(ctx, config)
 	if err != nil {
 		return nil, err
 	}

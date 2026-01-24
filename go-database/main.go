@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"log"
 	"time"
-	"golang.org/x/crypto/bcrypt"
+
+	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func initializeDatabase(ctx context.Context) (*pgxpool.Pool, error) {
@@ -85,6 +87,22 @@ func getAllData(ctx context.Context, db *pgxpool.Pool) ([]User, error) {
 	return users, nil
 }
 
+func getDataByName(ctx context.Context, db *pgxpool.Pool, name string) (*User, error) {
+	var user User
+	err := db.QueryRow(
+		ctx,
+		`SELECT username, name, password FROM users WHERE name = $1`,
+		name,
+	).Scan(&user.Username, &user.Name, &user.Password)
+	if err != nil {
+		if err == pgx.ErrNoRows {
+			return nil, nil
+		}
+		return nil, err
+	}
+	return &user, nil
+}
+
 func main() {
 	// Context with timeout
 	ctx, cancel := context.WithTimeout(context.Background(), 5 * time.Second)
@@ -108,4 +126,11 @@ func main() {
 	for i, u := range users {
 		fmt.Println(fmt.Sprint(i+1) + ".", u.Name)
 	}
+
+	// Get data by name
+	user, err := getDataByName(ctx, db, "Eko K")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Name: " + user.Name, "\nUsername: " + user.Username)
 }

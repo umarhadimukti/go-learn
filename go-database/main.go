@@ -103,6 +103,43 @@ func getDataByName(ctx context.Context, db *pgxpool.Pool, name string) (*User, e
 	return &user, nil
 }
 
+func updateData(ctx context.Context, db *pgxpool.Pool, username string, newName string) (error) {
+	cmd, err := db.Exec(
+		ctx,
+		`UPDATE users SET name = $1 WHERE username = $2`,
+		newName,
+		username,
+	)
+	if err != nil {
+		return err
+	}
+	if cmd.RowsAffected() == 0 {
+		return fmt.Errorf("No user updated")
+	}
+	return nil
+}
+
+func transactionData(ctx context.Context, db *pgxpool.Pool, users []User) error {
+	tx, err := db.Begin(ctx)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback(ctx)
+	for _, user := range users {
+		_, err := db.Exec(
+			ctx,
+			"INSERT INTO users VALUES ($1, $2, $3)",
+			user.Username,
+			user.Name,
+			user.Password,
+		)
+		if err != nil {
+			return err
+		}
+	}
+	return tx.Commit(ctx)
+}
+
 func main() {
 	// Context with timeout
 	ctx, cancel := context.WithTimeout(context.Background(), 5 * time.Second)
@@ -126,11 +163,32 @@ func main() {
 	for i, u := range users {
 		fmt.Println(fmt.Sprint(i+1) + ".", u.Name)
 	}
+	fmt.Println("==== GET BY NAME ====")
 
 	// Get data by name
-	user, err := getDataByName(ctx, db, "Eko K")
+	user, err := getDataByName(ctx, db, "Sugio Takeda")
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Println("Name: " + user.Name, "\nUsername: " + user.Username)
+	fmt.Println("==== UPDATE ====")
+
+	// Update by username
+	err = updateData(ctx, db, "ekok", "Eko Kurniawanx")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Data updated!")
+	fmt.Println("==== INSERT MANY USING TX ====")
+	
+	// Insert many users using transaction
+	usersList := []User{
+		{Username: "ilhamgots", Name: "Ilham Gots", Password: "test1234"},
+		{Username: "windabarusadar", Name: "Winda Barusadar", Password: "test1234"},
+		{Username: "kurrrniawan", Name: "Kurrrniawan", Password: "test1234"},
+	}
+	err = transactionData(ctx, db, usersList)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
